@@ -1,0 +1,292 @@
+/* =============================================
+   CSS Custom Properties — update these to match
+   your site's visual identity
+   ============================================= */
+:root {
+  --colour-primary: #2c3e50;
+  --colour-accent: #3498db;
+  --colour-text: #333;
+  --colour-text-light: #666;
+  --colour-background: #fff;
+  --colour-surface: #f8f9fa;
+  --colour-border: #e0e0e0;
+
+  --font-heading: system-ui, sans-serif;
+  --font-body: system-ui, sans-serif;
+
+  --container-width: 1100px;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 3rem;
+}
+
+/* =============================================
+   Reset & Base
+   ============================================= */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--colour-text);
+  background: var(--colour-background);
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--colour-accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =============================================
+   Layout
+   ============================================= */
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.main-content {
+  flex: 1;
+  padding: var(--spacing-lg) var(--spacing-md);
+  max-width: var(--container-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* =============================================
+   Header & Navigation
+   ============================================= */
+.site-header {
+  background: var(--colour-primary);
+  color: white;
+  padding: var(--spacing-md);
+}
+
+.site-header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.site-header h1 a {
+  color: white;
+  font-size: 1.5rem;
+}
+
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.95rem;
+}
+
+.site-nav a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+/* =============================================
+   Footer
+   ============================================= */
+.site-footer {
+  background: var(--colour-surface);
+  border-top: 1px solid var(--colour-border);
+  padding: var(--spacing-md);
+  text-align: center;
+  color: var(--colour-text-light);
+  font-size: 0.875rem;
+}
+
+/* =============================================
+   Loading & Error States
+   ============================================= */
+.loading {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: var(--colour-text-light);
+}
+
+.error {
+  text-align: center;
+  padding: var(--spacing-lg);
+  color: #c0392b;
+}
+
+.api-error {
+  max-width: 560px;
+  margin: var(--spacing-xl) auto;
+  padding: var(--spacing-lg);
+  border-left: 4px solid #c0392b;
+  background: #fdf2f2;
+  border-radius: 4px;
+}
+
+.api-error--missing {
+  border-left-color: #e67e22;
+  background: #fdf6ec;
+}
+
+.api-error--setup {
+  border-left-color: #2980b9;
+  background: #eaf4fb;
+}
+
+.api-error--setup h2 {
+  color: #2980b9;
+}
+
+.api-error h2 {
+  margin: 0 0 var(--spacing-sm);
+  font-size: 1.1rem;
+  color: #c0392b;
+}
+
+.api-error--missing h2 {
+  color: #c0392b;
+}
+
+.api-error p {
+  margin: 0 0 var(--spacing-sm);
+  color: var(--colour-text);
+}
+
+.api-error ul {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: var(--colour-text-light);
+  font-size: 0.9rem;
+}
+
+.api-error code {
+  background: rgba(0,0,0,0.06);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+  font-size: 0.85em;
+}
+
+/* =============================================
+   Post Grid & Cards
+   ============================================= */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.post-card {
+  border: 1px solid var(--colour-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--colour-surface);
+  transition: box-shadow 0.2s;
+}
+
+.post-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.post-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.post-card-body {
+  padding: var(--spacing-sm);
+}
+
+.post-card h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-excerpt {
+  font-size: 0.9rem;
+  color: var(--colour-text-light);
+  margin-bottom: var(--spacing-sm);
+}
+
+.read-more {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* =============================================
+   Single Post
+   ============================================= */
+.single-post {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.single-post h1 {
+  font-size: 2rem;
+  margin: var(--spacing-md) 0;
+}
+
+.featured-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: var(--spacing-md);
+}
+
+.post-content {
+  line-height: 1.8;
+}
+
+.post-content p { margin-bottom: 1rem; }
+.post-content h2 { margin: 1.5rem 0 0.75rem; }
+.post-content img { border-radius: 4px; margin: 1rem 0; }
+
+.back-link {
+  display: inline-block;
+  margin-bottom: var(--spacing-md);
+  font-size: 0.9rem;
+}
+
+/* =============================================
+   Responsive
+   ============================================= */
+@media (max-width: 600px) {
+  .site-header .container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .site-nav ul {
+    gap: var(--spacing-sm);
+  }
+
+  .single-post h1 {
+    font-size: 1.5rem;
+  }
+}
