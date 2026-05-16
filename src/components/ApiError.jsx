@@ -4,8 +4,8 @@
 const API_URL = import.meta.env.VITE_WP_API_URL
 const CPT_SLUG = import.meta.env.VITE_CPT_SLUG
 
-const PLACEHOLDER_URL = 'http://your-site.local/wp-json/wp/v2'
-const PLACEHOLDER_CPT = 'your-cpt-slug'
+const PLACEHOLDER_URL = 'http://the-grape-vine.local//wp-json/wp/v2'
+const PLACEHOLDER_CPT = 'events'
 
 function ApiError({ error, context = 'content' }) {
   const isUnconfiguredUrl = !API_URL || API_URL === PLACEHOLDER_URL
