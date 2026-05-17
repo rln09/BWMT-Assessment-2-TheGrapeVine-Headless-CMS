@@ -7,8 +7,7 @@ function Footer() {
       <div className="container">
 
         <p>
-          © 2026 The Grape Vine - Luxury vineyard venue for weddings,
-          corporate events, and private celebrations.
+          © 2026 The Grape Vine 
         </p>
 
       </div>
