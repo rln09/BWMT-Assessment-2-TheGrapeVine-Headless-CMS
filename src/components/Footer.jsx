@@ -1,10 +1,27 @@
 function Footer() {
+
   return (
-    <footer className="site-footer">
-      {/* TODO: Update with your site name and scenario */}
-      <p>&copy; {new Date().getFullYear()} My Site. Built with React + WordPress.</p>
+
+    <footer>
+
+      <div className="container">
+
+        <h3>The Grape Vine</h3>
+
+        <p>
+          Luxury vineyard venue for weddings,
+          corporate events, and private celebrations.
+        </p>
+
+        <p>
+          © 2026 The Grape Vine
+        </p>
+
+      </div>
+
     </footer>
-  )
+
+  );
 }
 
-export default Footer
+export default Footer;

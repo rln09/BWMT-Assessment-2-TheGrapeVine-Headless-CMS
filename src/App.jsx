@@ -1,12 +1,12 @@
-import { Routes, Route } from 'react-router-dom'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import Home from './pages/Home'
-import BlogList from './pages/BlogList'
-import SinglePost from './pages/SinglePost'
-import CptList from './pages/CptList'
-import CptDetail from './pages/CptDetail'
-import WpPage from './pages/WpPage'
+import {Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import BlogList from './pages/BlogList';
+import SinglePost from './pages/SinglePost';
+import CptList from './pages/CptList';
+import CptDetail from './pages/CptDetail';
+import WpPage from './pages/WpPage';
 
 function App() {
   return (
@@ -27,4 +27,6 @@ function App() {
   )
 }
 
-export default App
+export default App                  
+
+
