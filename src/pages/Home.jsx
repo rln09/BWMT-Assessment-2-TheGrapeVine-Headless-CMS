@@ -181,7 +181,7 @@ function Home() {
         <div className="container">
           <h2>Ready to Create Unforgettable Memories?</h2>
           <p>Contact us today to schedule a private tour of our vineyard venue.</p>
-          <Link to="/contact-us" className="btn btn-primary btn-large">
+          <Link to="/page/contact" className="btn btn-primary btn-large">
             Inquire Now
           </Link>
         </div>
@@ -191,3 +191,4 @@ function Home() {
 }
 
 export default Home;
+

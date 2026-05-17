@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: white;
+  color: white; 
   margin-top: -2rem;
 }
 
@@ -40,7 +40,36 @@
   justify-content: center;
   flex-wrap: wrap;
 }
+/* Add this to your existing CSS */
 
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.site-header h1 {
+  margin: 0;
+}
+
+.site-nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+/* Responsive - stacks on mobile */
+@media (max-width: 600px) {
+  .header-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .site-nav ul {
+    justify-content: center;
+  }
+}
 /* Buttons */
 .btn {
   display: inline-block;
@@ -51,7 +80,6 @@
   cursor: pointer;
   text-decoration: none;
 }
-
 .btn-primary {
   background: #e6e0df;  
   color: rgb(150, 26, 4);

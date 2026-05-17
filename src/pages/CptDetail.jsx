@@ -45,7 +45,7 @@ function CptDetail() {
   return (
     <article className="single-post">
       {/* TODO: Update link label to match your CPT name */}
-      <Link to="/cpt" className="back-link">← Back to portfolio</Link>
+      <Link to="/cpt" className="back-link">← Back to Events</Link>
 
       <h1>{item.title.rendered}</h1>
 

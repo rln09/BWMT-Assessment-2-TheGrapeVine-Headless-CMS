@@ -43,7 +43,7 @@ function CptList() {
   return (
     <section>
       {/* TODO: Replace "Portfolio" with your CPT name */}
-      <h1>Portfolio</h1>
+      <h1>Events</h1>
 
       {items.length === 0 ? (
         <p>No items found. Add entries to your Custom Post Type in WordPress first.</p>
