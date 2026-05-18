@@ -86,31 +86,31 @@ function Home() {
                 dangerouslySetInnerHTML={{ __html: homePage.content.rendered }}
               />
             </>
-          ) : (
-            <>
-              <p>
-                Our estate provides beautifully designed indoor and outdoor spaces suitable for weddings, corporate functions, private parties, celebrations, and seasonal events of all sizes.
-                From elegant weddings to lively festivals, The Grape Vine offers a scenic and welcoming atmosphere designed to create lasting memories for every guest.
-                We are committed to delivering personalized service, professional event coordination, and seamless experiences that make every occasion stress-free and memorable.
-              </p>
-              <p>
-                <h3>Weddings Cermonies & Receptions</h3>
-                Romantic vineyard ceremonies with scenic photo oppurtunities
-              </p>
-              <p>
-              <h3>Private Celebrations</h3>
-              Birthdays, anniversaries, and milestone events worth remembering.
-              </p>
-              <p>
-              <h3>Corporate Events</h3>
-              Professional yet inspiring spaces for meetings, retreats, and launches.
-             </p>
-             <p>
-              <h3>Seasonal Experiences</h3>
-              Wine tatings, harvest events, and outdoor gatherings. Each event is tailored to create a seamless blend of comfort, beauty, and elegance.
-             </p>
-            </>
+          ) :  (
+           <p>Loading...</p>
           )}
+        </div>
+      </section>
+
+      {/* ========== LATEST BLOG POSTS SECTION ========== */}
+      <section className="latest-posts-section">
+        <div className="container">
+          <h2>Latest from Our Blog</h2>
+          <p className="section-subtitle">Vineyard news, wedding tips, and more</p>
+          
+          {latestPosts.length === 0 ? (
+            <p className="no-content">No blog posts found. Add posts in WordPress first.</p>
+          ) : (
+            <div className="posts-grid">
+              {latestPosts.map(post => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
+          )}
+          
+          <div className="section-footer">
+            <Link to="/blog" className="view-all">View All Posts →</Link>
+          </div>
         </div>
       </section>
 
@@ -154,28 +154,6 @@ function Home() {
         </div>
       </section>
 
-      {/* ========== LATEST BLOG POSTS SECTION ========== */}
-      <section className="latest-posts-section">
-        <div className="container">
-          <h2>Latest from Our Blog</h2>
-          <p className="section-subtitle">Vineyard news, wedding tips, and more</p>
-          
-          {latestPosts.length === 0 ? (
-            <p className="no-content">No blog posts found. Add posts in WordPress first.</p>
-          ) : (
-            <div className="posts-grid">
-              {latestPosts.map(post => (
-                <PostCard key={post.id} post={post} />
-              ))}
-            </div>
-          )}
-          
-          <div className="section-footer">
-            <Link to="/blog" className="view-all">View All Posts →</Link>
-          </div>
-        </div>
-      </section>
-
       {/* ========== CALL TO ACTION SECTION ========== */}
       <section className="cta-section">
         <div className="container">
@@ -191,4 +169,3 @@ function Home() {
 }
 
 export default Home;
-
