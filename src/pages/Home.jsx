@@ -1,4 +1,3 @@
-// Home.jsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PostCard from '../components/PostCard';
@@ -8,7 +7,6 @@ const API = import.meta.env.VITE_WP_API_URL;
 const CPT = import.meta.env.VITE_CPT_SLUG;
 
 function Home() {
-  // State for different data types
   const [homePage, setHomePage] = useState(null);
   const [featuredEvents, setFeaturedEvents] = useState([]);
   const [latestPosts, setLatestPosts] = useState([]);
@@ -18,27 +16,27 @@ function Home() {
   useEffect(() => {
     const fetchHomeData = async () => {
       try {
-        // Fetch all three data sources in parallel for better performance
         const [pageRes, eventsRes, postsRes] = await Promise.all([
-          fetch(`${API}/pages?slug=home`),           // Home page content
-          fetch(`${API}/${CPT}?_embed&per_page=3`),  // Featured events (limit 3)
-          fetch(`${API}/posts?_embed&per_page=3`)    // Latest blog posts (limit 3)
+          // ✅ FIX: fetch by slug (no more ID, no Kubio dependency)
+          fetch(`${API}/pages?slug=home&_embed`),
+
+          fetch(`${API}/${CPT}?_embed&per_page=3`),
+
+          fetch(`${API}/posts?_embed&per_page=3`)
         ]);
 
-        // Check for errors
         if (!pageRes.ok) throw new Error(`Page error: ${pageRes.status}`);
-        if (!eventsRes.ok) throw new Error(`Events error: ${eventsRes.status}`);
+        if (!eventsRes.ok) throw new Error(`Events error: ${pageRes.status}`);
         if (!postsRes.ok) throw new Error(`Posts error: ${postsRes.status}`);
 
-        // Parse JSON responses
         const pageData = await pageRes.json();
         const eventsData = await eventsRes.json();
         const postsData = await postsRes.json();
 
-        // Set state with fetched data
-        setHomePage(pageData[0] || null);
-        setFeaturedEvents(eventsData);
-        setLatestPosts(postsData);
+        // ✅ slug query returns array → take first item
+        setHomePage(pageData?.[0] || null);
+        setFeaturedEvents(eventsData || []);
+        setLatestPosts(postsData || []);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -49,7 +47,6 @@ function Home() {
     fetchHomeData();
   }, []);
 
-  // Loading state
   if (loading) {
     return (
       <div className="loading-container">
@@ -58,7 +55,6 @@ function Home() {
     );
   }
 
-  // Error state
   if (error) {
     return <ApiError error={error} context="home page content" />;
   }
@@ -68,38 +64,31 @@ function Home() {
       {/* ========== HERO SECTION ========== */}
       <section className="hero">
         <div className="hero-content">
-          <h1>Welcome to The Grape Vine!</h1>
-          <p className="hero-tagline">
-            <h3>A venue designed for each occasion</h3>
-          </p>
-        </div>
-      </section>
 
-      {/* ========== WELCOME MESSAGE ========== */}
-      <section className="welcome-section">
-        <div className="container">
+          {/* ALL CONTENT FROM WORDPRESS */}
           {homePage ? (
             <>
-              <h2>{homePage.title.rendered}</h2>
-              <div 
-                className="welcome-content"
-                dangerouslySetInnerHTML={{ __html: homePage.content.rendered }}
+              <h1>{homePage.title.rendered}</h1>
+
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: homePage.content.rendered
+                }}
               />
             </>
-          ) :  (
-           <p>Loading...</p>
+          ) : (
+            <p>No homepage content found.</p>
           )}
         </div>
       </section>
 
-      {/* ========== LATEST BLOG POSTS SECTION ========== */}
+      {/* ========== BLOG POSTS ========== */}
       <section className="latest-posts-section">
         <div className="container">
           <h2>Latest from Our Blog</h2>
-          <p className="section-subtitle">Vineyard news, wedding tips, and more</p>
-          
+
           {latestPosts.length === 0 ? (
-            <p className="no-content">No blog posts found. Add posts in WordPress first.</p>
+            <p>No blog posts found.</p>
           ) : (
             <div className="posts-grid">
               {latestPosts.map(post => (
@@ -107,61 +96,44 @@ function Home() {
               ))}
             </div>
           )}
-          
-          <div className="section-footer">
-            <Link to="/blog" className="view-all">View All Posts →</Link>
-          </div>
         </div>
       </section>
 
-      {/* ========== FEATURED EVENTS SECTION (CPT) ========== */}
+      {/* ========== EVENTS ========== */}
       <section className="featured-section">
         <div className="container">
           <h2>Featured Events</h2>
-          <p className="section-subtitle">Discover our most popular packages</p>
-          
+
           {featuredEvents.length === 0 ? (
-            <p className="no-content">No events found. Add events in WordPress first.</p>
+            <p>No events found.</p>
           ) : (
             <div className="events-grid">
               {featuredEvents.map(event => (
                 <div key={event.id} className="event-card">
+
                   {event._embedded?.['wp:featuredmedia']?.[0]?.source_url && (
-                    <img 
-                      src={event._embedded['wp:featuredmedia'][0].source_url} 
+                    <img
+                      src={event._embedded['wp:featuredmedia'][0].source_url}
                       alt={event.title.rendered}
                       className="event-image"
                     />
                   )}
-                  <div className="event-card-body">
-                    <h3>{event.title.rendered}</h3>
-                    
-                    <p className="event-excerpt">
-                      {event.excerpt?.rendered?.replace(/<\/?[^>]+(>|$)/g, '').slice(0, 120)}...
-                    </p>
-                    <Link to={`/cpt/${event.id}`} className="btn btn-outline">
-                      View Event →
-                    </Link>
-                  </div>
+
+                  <h3>{event.title.rendered}</h3>
+
+                  <p>
+                    {event.excerpt?.rendered
+                      ?.replace(/<[^>]+>/g, '')
+                      .slice(0, 120)}...
+                  </p>
+
+                  <Link to={`/cpt/${event.id}`}>
+                    View Event →
+                  </Link>
                 </div>
               ))}
             </div>
           )}
-          
-          <div className="section-footer">
-            <Link to="/cpt" className="view-all">View All Events →</Link>
-          </div>
-        </div>
-      </section>
-
-      {/* ========== CALL TO ACTION SECTION ========== */}
-      <section className="cta-section">
-        <div className="container">
-          <h2>Ready to Create Unforgettable Memories?</h2>
-          <p>Contact us today to schedule a private tour of our vineyard venue.</p>
-          <Link to="/page/contact" className="btn btn-primary btn-large">
-            Inquire Now
-          </Link>
         </div>
       </section>
     </>

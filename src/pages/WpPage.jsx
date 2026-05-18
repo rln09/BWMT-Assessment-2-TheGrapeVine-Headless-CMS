@@ -20,7 +20,7 @@ function WpPage() {
     const fetchPage = async () => {
       try {
         // WordPress pages API supports filtering by slug
-        const response = await fetch(`${API}/pages?slug=${slug}`)
+        const response = await fetch(`${API}/pages?slug=${slug}&_embed`)
         if (!response.ok) throw new Error(`HTTP error: ${response.status}`)
         const data = await response.json()
         if (data.length === 0) throw new Error('Page not found')
@@ -50,5 +50,6 @@ function WpPage() {
 }
 
 export default WpPage
+
 
 
