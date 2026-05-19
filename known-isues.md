@@ -1,0 +1,1 @@
+Netlify not displaying content from InfinityFree. I tried cross cheking the API URL and CORS several times but could not fix the issue. I am not entirely sure what the issue is since the site content was easily imported to InfinityFree, so my assumption is it is the Netlify URL.
