@@ -113,7 +113,7 @@ body {
 
 .hero {
   background: linear-gradient(rgba(74, 14, 30, 0.7), rgba(74, 14, 30, 0.7)), 
-              url('https://thegrapevine.infinityfreeapp.com//wp-content/uploads/hero-vineyard.jpg');
+              url('https://thegrapevine.infinityfreeapp.com/wp-content/uploads/hero-vineyard.jpg');
   background-size: cover;
   background-position: center;
   min-height: 70vh;

@@ -4,7 +4,7 @@
 const API_URL = import.meta.env.VITE_WP_API_URL
 const CPT_SLUG = import.meta.env.VITE_CPT_SLUG
 
-const PLACEHOLDER_URL = 'https://thegrapevine.infinityfreeapp.com///wp-json/wp/v2'
+const PLACEHOLDER_URL = 'https://thegrapevine.infinityfreeapp.com/wp-json/wp/v2'
 const PLACEHOLDER_CPT = 'events'
 
 function ApiError({ error, context = 'content' }) {
